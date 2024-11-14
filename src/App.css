@@ -1,0 +1,11 @@
+.App{
+    margin: auto;
+    background-color: aqua;
+    padding: 30px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    font-family: sans-serif;
+}
+.error-message{
+    color: red;
+}
