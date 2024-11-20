@@ -10,7 +10,6 @@ function Grp204WeatherApp() {
         error: false,
     });
     const [favorites, setFavorites] = useState([]);
-    const [theme, setTheme] = useState('day'); // Day or Night theme
 
     useEffect(() => {
         const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -26,15 +25,7 @@ function Grp204WeatherApp() {
         return date;
     };
 
-    const updateTheme = (timezone) => {
-        const localTime = new Date(new Date().getTime() + timezone * 1000);
-        const hours = localTime.getUTCHours(); // Local hour based on timezone
-        if (hours >= 6 && hours < 18) {
-            setTheme('day'); // Set to light theme for day
-        } else {
-            setTheme('night'); // Set to dark theme for night
-        }
-    };
+   
 
     const search = async (event) => {
         if (event.key === 'Enter') {
@@ -58,7 +49,6 @@ function Grp204WeatherApp() {
             })
             .then((res) => {
                 setWeather({ data: res.data, loading: false, error: false });
-                updateTheme(res.data.timezone); // Update theme based on city's timezone
             })
             .catch((error) => {
                 setWeather({ ...weather, data: {}, error: true });
@@ -80,7 +70,6 @@ function Grp204WeatherApp() {
             })
             .then((res) => {
                 setWeather({ data: res.data, loading: false, error: false });
-                updateTheme(res.data.timezone); // Update theme based on city's timezone
             })
             .catch((error) => {
                 setWeather({ ...weather, data: {}, error: true });
@@ -118,7 +107,7 @@ function Grp204WeatherApp() {
     };
 
     return (
-        <div className={`App ${theme}`}>
+        <div >
             <h1 className="app-name">Application Météo grp206</h1>
             <div className="search-bar">
                 <input
